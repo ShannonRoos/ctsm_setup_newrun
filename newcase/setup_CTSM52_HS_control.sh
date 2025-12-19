@@ -27,7 +27,7 @@ MACH=derecho
 
 
 # define project
-PROJ=P93300041
+PROJ=#####
 
 
 # define compiler
@@ -50,15 +50,15 @@ NTASKS=128           # number of tasks (= cores used)
 ver=e52                                                       # version, used in CASE name, e122 = CESM 1.2.2
 #flavor="${COMPILER:0:1}${MPILIB:0:1}"                        # either im, io, pm, po
 type=control                                                  # type of run
-desc=HSF_exp5_endday                                 # description, used in CASE name
-nnn=0                                                  # unique number, used in CASE name
+#desc=$type-$flavor$NTASKS                                    # description, used in CASE name
+nnn=control                                                   # unique number, used in CASE name
 comp=$( echo ${COMP:0:5} | tr '[:upper:]' '[:lower:]' )
 
 
 # define run settings
-start_year=1980 # start year of the simulation (1976)
-end_year=1985    # end year of the SST dataset
-simul_length=5  # years
+start_year=1970  # start year of the simulation (1976)
+end_year=2014  # end year of the SST dataset
+simul_length=12  # months
 
 
 # define namelist script
@@ -66,8 +66,8 @@ nl_file=user_nl_${nnn}.sh
 
 
 # set whether you are in production mode or test mode
-production=false  # true= production runs; false=testing
-nresubmit=6     # if simul_length=12, this is number of years -1; use for final production runs including spinup
+production=true # true=final production runs; false=testing
+nresubmit= 43    # if simul_length=12, this is number of years -1; use for final production runs including spinup
 
 
 
@@ -86,14 +86,12 @@ cd $SCRIPTSDIR
 
 
 # generate casename
-CASE=$comp.$ver.$COMP.$RES.$nnn.$desc
+CASE=$comp.$ver.$COMP.$RES.$nnn
 
 
 # create a new case in the directory 'cases'
 ./create_newcase --case $CASEDIR/$CASE  --res $RES --compset $COMP --machine $MACH --project $PROJ
 
-##copy CROPHEATSTRESS script to SourceMods
-cp /glade/u/home/sroos/setup_newrun/HSF_experiments/CropHeatStress_${desc}.F90 $CASEDIR/$CASE/SourceMods/src.clm/CropHeatStress.F90
 
 
 #=====================================================
@@ -125,7 +123,7 @@ cp $SETUPDIR/`basename "$0"` .
 
 
 # modify env_run.xml - MAY BE CHANGED ANYTIME during a run
-./xmlchange STOP_OPTION=nyears
+./xmlchange STOP_OPTION=nmonths
 ### ./xmlchange -file env_run.xml -id STOP_OPTION       -val ndays
 ./xmlchange STOP_N=${simul_length}
 
@@ -178,8 +176,8 @@ fi
 
 
 # Check the submitted job status (can take a bit before status has come through)
-#qstat -u sroos
-
+sleep 8 
+qstat -u sroos
 
 
 

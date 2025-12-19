@@ -27,15 +27,13 @@ cat > user_nl_clm << EOF
 ! Set glc_do_dynglacier  with GLC_TWO_WAY_COUPLING               env variable
 !----------------------------------------------------------------------------------
 
-finidat = '/glade/u/home/sroos/scratch/restart_files/i.t520.IHistClm50BgcCrop.hcru_hcru_mt13.obsclim-histsoc-default-GSWP3-W5E5-go-1280.003_branch.clm2.r.1980-01-01-00000.nc'
-use_init_interp = .true.
 
 hist_empty_htapes = .true.
 
 hist_fincl1 = 'GRAINC_TO_FOOD', 'TSA', 'TV','ELAI', 'TLAI', 'TSOI','H2OSOI', 'QSOIL', 'QVEGT', 'TREFMNAV', 'SOILWATER_10CM', 'GPP', 'NPP'
 hist_fincl2 = 'ELAI','TVMAX', 'TVMIN', 'TV', 'TSA', 'H2OSOI', 'TSOI', 'TREFMXAV','TREFMNAV', 'SOILWATER_10CM', 'GPP', 'NPP', 'TVDAY', 'TVNIGHT', 'HS_NDAYS', 'HW', 'BGLFR', 'HSF', 'GRAINC_TO_FOOD'
 hist_fincl3 = 'GRAINC_TO_FOOD', 'LITFALL', 'ELAI','TLAI', 'TV', 'NPP', 'TVDAY', 'TVNIGHT'
-hist_fincl4 = 'PEAKTVDAY', 'PEAKTVDAY_YRS','ELAI','TLAI', 'TV','TVMAX', 'TVMIN', 'GPP', 'CPHASE', 'NPP', 'TVDAY', 'TVNIGHT','HS_NDAYS', 'HW', 'BGLFR', 'HSF', 'GRAINC_TO_FOOD'
+hist_fincl4 = 'ELAI','TLAI', 'TV','TVMAX', 'TVMIN', 'GPP', 'CPHASE', 'NPP', 'TVDAY', 'TVNIGHT','HS_NDAYS', 'HW', 'BGLFR', 'HSF', 'GRAINC_TO_FOOD'
 hist_fincl5 = 'GRAINC_TO_FOOD_ANN'
 
 hist_nhtfrq = 0, -24, 0, -24, 17520

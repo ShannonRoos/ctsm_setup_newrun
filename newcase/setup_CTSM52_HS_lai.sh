@@ -27,7 +27,7 @@ MACH=derecho
 
 
 # define project
-PROJ=P93300041
+PROJ=######
 
 
 # define compiler
@@ -49,9 +49,9 @@ NTASKS=128           # number of tasks (= cores used)
 # define other information
 ver=e52                                                       # version, used in CASE name, e122 = CESM 1.2.2
 #flavor="${COMPILER:0:1}${MPILIB:0:1}"                        # either im, io, pm, po
-type=control                                                  # type of run
-desc=HSF_repr_func_edits                            # description, used in CASE name
-nnn=3                                                  # unique number, used in CASE name
+#type=control                                                  # type of run
+nexp=7   					#number of experiment
+desc=HSF_lai_exp$nexp                            # description, used in CASE name
 comp=$( echo ${COMP:0:5} | tr '[:upper:]' '[:lower:]' )
 
 
@@ -62,7 +62,7 @@ simul_length=5  # years
 
 
 # define namelist script
-nl_file=user_nl_${nnn}.sh
+nl_file=user_nl.sh
 
 
 # set whether you are in production mode or test mode
@@ -92,8 +92,8 @@ CASE=$comp.$ver.$COMP.$RES.$desc
 # create a new case in the directory 'cases'
 ./create_newcase --case $CASEDIR/$CASE  --res $RES --compset $COMP --machine $MACH --project $PROJ
 
-##copy CROPHEATSTRESS script to SourceMods
-#cp /glade/u/home/sroos/setup_newrun/HSF_experiments/CropHeatStress_${desc}.F90 $CASEDIR/$CASE/SourceMods/src.clm/CropHeatStress.F90
+#copy CROPHEATSTRESS script to SourceMods
+cp /glade/u/home/sroos/setup_newrun/HSF_lai_experiments/CropHeatStress_HSF_exp$nexp.F90 $CASEDIR/$CASE/SourceMods/src.clm/CropHeatStress.F90
 
 
 #=====================================================
